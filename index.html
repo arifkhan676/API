@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>JSON</h1>
+
+    <input id="title" type="text" placeholder="title">
+<br>
+<input id="bodycont" type="text" placeholder="title er jinish">
+<br>
+ <button id="sub" type="submit">submit </button>
+
+    <ul id="userList">
+      
+    </ul>
+    <script>
+
+      document.getElementById("sub").addEventListener("click",function(){
+        const titlePro = document.getElementById("title").value;
+        const bodyC = document.getElementById("bodycont").value;
+        const post = ({title:titlePro, body:bodyC })
+       nowPostServer(post);
+     })
+     const postInfo = {title:"myName",body:"myXXLBody"}
+
+  function nowPostServer(postInfo){
+       fetch('https://jsonplaceholder.typicode.com/posts', {
+           method: 'POST',
+           body: JSON.stringify(postInfo),
+           headers: {
+             'Content-type': 'application/json; charset=UTF-8',
+           },
+         })
+           .then((response) => response.json())
+           .then( data => console.log(data))
+  }
+
+        /*
+        const user = {
+            id:23,
+            name:"arif",
+            group:["sanku","manku","danku"]
+        }
+        const stringCovert = JSON.stringify(user);
+        console.log(stringCovert);
+        const objCovert = JSON.parse(stringCovert);
+        console.log(objCovert); 
+
+
+        //////////////////
+
+        fetch('https://jsonplaceholder.typicode.com/users') //here is a promise that the link will give you access
+      .then(response => response.json())
+      .then(json =>  DisplayUser(json))
+      .catch(error=> console.error("Error"))
+       
+function DisplayUser(users) {
+    const userlist = users.map(user => user.username );
+
+    const ulUser = document.getElementById("userList");
+    for (var i = 0;i<userlist.length; i++){
+        const username = userlist[i];
+        const li = document.createElement("li");
+        li.innerText = username;
+        ulUser.appendChild(li);
+    }
+
+}
+      /////////////////
+
+        
+*/
+
+
+
+
+    </script>
+
+</body>
+</html>
